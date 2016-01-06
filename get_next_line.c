@@ -6,40 +6,36 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 12:02:22 by pabril            #+#    #+#             */
-/*   Updated: 2015/12/14 13:59:29 by pabril           ###   ########.fr       */
+/*   Updated: 2016/01/06 18:26:51 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft.h"
 
-static int	find_end_line(char buffer[BUFF_SIZE + 1])
+int	get_next_line(int const fd, char **line)
 {
-	int i;
+	static char *buffer;
+	int			ret;
 
-	while (buffer[i] != '\n' || buffer[i] == '\0')
-		i++;
-	return (i);
+	buffer = (char *)malloc(BUFF_SIZE + 1);
+	ret = BUFF_SIZE;
+	while (ret == BUFF_SIZE)
+	{
+		ret = read(fd, buffer, BUFF_SIZE);
+		if (ret == -1)
+			return (-1);
+		//fill_lines(buffer, line, ret);
+		printf("%s\n", buffer);
+	}
+	printf("%s\n", buffer);
+	return (0);
 }
 
-int			get_next_line(int const fd, char **line)
+int main(int argc, const char *argv[])
 {
-	static char buffer[BUFF_SIZE + 1] = {'\0'};
-	int			ret;
-	int			len;
+	char **line;
 
-	if (buffer[0] == '\0')
-		ret = read(fd, &buffer, BUFF_SIZE);
-	if (ret == -1)
-		return (-1);
-	if (ret == 0)
-		return (0);
-	len = find_end_line(buffer);
-	*line = ft_strnew(len + 1);
-	ft_memmove(*line, buffer, len);
-	if (buffer[len] == '\n')
-		ft_memmove(buffer, buffer + len + 1);
-	else
-		buffer += len
-	return (0);
+	get_next_line(0, line);
+	return 0;
 }
