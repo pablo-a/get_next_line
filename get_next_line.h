@@ -6,14 +6,14 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 12:48:05 by pabril            #+#    #+#             */
-/*   Updated: 2016/01/06 18:27:19 by pabril           ###   ########.fr       */
+/*   Updated: 2016/01/06 18:38:36 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# define BUFF_SIZE 3
+# define BUFF_SIZE 2
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/uio.h>

@@ -6,7 +6,7 @@
 /*   By: pabril <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 12:02:22 by pabril            #+#    #+#             */
-/*   Updated: 2016/01/06 18:26:51 by pabril           ###   ########.fr       */
+/*   Updated: 2016/01/06 18:44:08 by pabril           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ int	get_next_line(int const fd, char **line)
 	static char *buffer;
 	int			ret;
 
-	buffer = (char *)malloc(BUFF_SIZE + 1);
+	buffer = ft_strnew(BUFF_SIZE + 2);
 	ret = BUFF_SIZE;
-	while (ret == BUFF_SIZE)
+	while (ret > 0)
 	{
 		ret = read(fd, buffer, BUFF_SIZE);
-		if (ret == -1)
-			return (-1);
+		if (ret < 1)
+			break ;
 		//fill_lines(buffer, line, ret);
-		printf("%s\n", buffer);
+		printf("buffer = '%s' et ret = '%d'\n", buffer, ret);
 	}
-	printf("%s\n", buffer);
+	printf("dernier buffer = '%s'\n", buffer);
 	return (0);
 }
 
